@@ -7,22 +7,30 @@ using System.Web;
 
 namespace Data
 {
+    /// <summary>
+    ///  Class to access to your data using methods
+    /// </summary>
     public class DataAccess
     {
-        /*  CONSTRUCTOR VACÍO */
+        /// <summary>
+        ///  Empty constructor
+        /// </summary>
         public DataAccess() { }
-
-        /****************************************
-         *              CONEXIONES              * 
-         ***************************************/
-
-        /* RETORNA LA CONEXIÓN POR DEFAULT EN WEBCONFIG CON dbConn */
+      
+        /// <summary>
+        ///     Returns connection using connection string 
+        /// </summary>
+        /// <returns></returns>
         private String connectionString()
         {
-            return ConfigurationManager.ConnectionStrings["NEXTADMIN_CONECTION"].ToString();
+            return ConfigurationManager.ConnectionStrings["CONNECTION_NAME"].ToString();
         }
 
-        /* RETORNA UNA CONEXION DIFERENTE */
+        /// <summary>
+        ///     Returns connection receiving the connection string name
+        /// </summary>
+        /// <param name="Connection"></param>
+        /// <returns></returns>
         private String connectionString(String Connection)
         {
             return ConfigurationManager.ConnectionStrings[Connection].ToString();
@@ -31,8 +39,12 @@ namespace Data
         /****************************************
          *              DATASET                 * 
          ***************************************/
-
-        /* EJECUTA STORED PROCEDURE Y RETORNA DATASET */
+         
+        /// <summary>
+        ///     Execute stored procedure without params and returns DataSet
+        /// </summary>
+        /// <param name="spName">Stored procedure name</param>
+        /// <returns></returns>
         public DataSet executeStoreProcedureDataSet(String spName)
         {
 
@@ -72,8 +84,13 @@ namespace Data
                 }
             }
         }
-
-        /* EJECUTA STORED PROCEDURE Y RETORNA DATASET EN UNA CONEXION DIFERENTE */
+        
+        /// <summary>
+        ///     Execute stored procedure without params using diferent connection string and returns DataSet
+        /// </summary>
+        /// <param name="spName">Stored procedure name</param>
+        /// <param name="Connection">ConnectionString name</param>
+        /// <returns></returns>
         public DataSet executeStoreProcedureDataSet(String spName, String Connection)
         {
 
@@ -113,8 +130,13 @@ namespace Data
                 }
             }
         }
-
-        /* EJECUTA STORED PROCEDURE CON PARAMETROS Y RETORNA DATASET */
+        
+        /// <summary>
+        ///     Execute stored procedure with params and returns DataSet
+        /// </summary>
+        /// <param name="spName">Stored procedure name</param>
+        /// <param name="parameters">Dictionary with params</param>
+        /// <returns></returns>
         public DataSet executeStoreProcedureDataSet(String spName, Dictionary<String, object> parameters)
         {
 
@@ -159,8 +181,14 @@ namespace Data
                 }
             }
         }
-
-        /* EJECUTA STORED PROCEDURE CON PARAMETROS Y RETORNA DATASET EN UNA CONEXION DIFERENTE */
+    
+        /// <summary>
+        ///     Execute stored procedure with params using specific connection returns DataSet
+        /// </summary>
+        /// <param name="spName">Stored procedure name</param>
+        /// <param name="parameters">Dictionary with params</param>
+        /// <param name="Connection">ConnectionString name</param>
+        /// <returns></returns>
         public DataSet executeStoreProcedureDataSet(String spName, Dictionary<String, object> parameters, String Connection)
         {
 
@@ -211,8 +239,11 @@ namespace Data
          *              DATATABLE               * 
          ***************************************/
 
-
-        /* EJECUTA STORED PROCEDURE Y RETORNA UN DATATABLE */
+        /// <summary>
+        ///     Execute stored procedure without params and returns DataTable
+        /// </summary>
+        /// <param name="StoredProcedure">Stored procedure name</param>
+        /// <returns></returns>
         public DataTable executeStoredProcedureDataTable(String StoredProcedure)
         {
             SqlConnection dbConn = new SqlConnection(connectionString());
@@ -244,7 +275,12 @@ namespace Data
             }
         }
 
-        /* EJECUTA STORED PROCEDURE Y RETORNA UN DATATABLE EN UNA CONEXION DIFERENTE */
+        /// <summary>
+        ///     Execute stored procedure without params using specific connection returns DataTable
+        /// </summary>
+        /// <param name="StoredProcedure">Stored procedure name</param>
+        /// <param name="Connection">ConnectionString name</param>
+        /// <returns></returns>
         public DataTable executeStoredProcedureDataTable(String StoredProcedure, String Connection)
         {
             SqlConnection dbConn = new SqlConnection(connectionString(Connection));
@@ -276,7 +312,12 @@ namespace Data
             }
         }
 
-        /* EJECUTA STORED PROCEDURE CON PARAMETROS Y RETORNA UN DATATABLE */
+        /// <summary>
+        ///     Execute stored procedure with params and returns DataTable
+        /// </summary>
+        /// <param name="StoredProcedure">Stored Procedure name</param>
+        /// <param name="Parameters">Dictionary with params</param>
+        /// <returns></returns>
         public DataTable executeStoredProcedureDataTable(String StoredProcedure, Dictionary<String, Object> Parameters)
         {
             SqlConnection dbConn = new SqlConnection(connectionString());
@@ -313,7 +354,13 @@ namespace Data
             }
         }
 
-        /* EJECUTA STORED PROCEDURE CON PARAMETROS Y RETORNA UN DATATABLE EN UNA CONEXION DIFERENTE */
+        /// <summary>
+        ///     Execute stored procedure with params using specific connection returns DataTable
+        /// </summary>
+        /// <param name="StoredProcedure">Stored procedure name</param>
+        /// <param name="Parameters">Dictionary with params</param>
+        /// <param name="Connection">ConnectionString name</param>
+        /// <returns></returns>
         public DataTable executeStoredProcedureDataTable(String StoredProcedure, Dictionary<String, Object> Parameters, String Connection)
         {
             SqlConnection dbConn = new SqlConnection(connectionString(Connection));
@@ -354,9 +401,11 @@ namespace Data
         /****************************************
          *              NOTHING                 * 
          ***************************************/
-
-
-        /* EJECUTA STORED PROCEDURE Y NO RETORNA NADA */
+         
+        /// <summary>
+        ///     Execute stored procedure returns nothing
+        /// </summary>
+        /// <param name="StoredProcedure">Stored procedure name</param>
         public void executeStoreProcedureNonQuery(String StoredProcedure)
         {
             SqlConnection dbconn = new SqlConnection(connectionString());
@@ -384,7 +433,11 @@ namespace Data
             }
         }
 
-        /* EJECUTA STORED PROCEDURE Y NO RETORNA NADA EN UNA CONEXION DIFERENTE*/
+        /// <summary>
+        ///     Execute stored procedure using specific connection returns nothing
+        /// </summary>
+        /// <param name="StoredProcedure">Stored procedure name</param>
+        /// <param name="Connection">ConnectionString name</param>
         public void executeStoreProcedureNonQuery(String StoredProcedure, String Connection)
         {
             SqlConnection dbconn = new SqlConnection(connectionString(Connection));
@@ -411,8 +464,12 @@ namespace Data
                 }
             }
         }
-
-        /* EJECUTA STORED PROCEDURE CON PARAMETROS SIN RETORNAR NADA */
+        
+        /// <summary>
+        ///     Execute stored procedure with params returns nothing
+        /// </summary>
+        /// <param name="StoredProcedure"></param>
+        /// <param name="parameters"></param>
         public void executeStoreProcedureNonQuery(String StoredProcedure, Dictionary<String, object> parameters)
         {
             SqlConnection dbconn = new SqlConnection(connectionString());
@@ -446,7 +503,12 @@ namespace Data
             }
         }
 
-        /* EJECUTA STORED PROCEDURE CON PARAMETROS EN CONEXION DIFERENTE */
+        /// <summary>
+        ///     Execute stored procedure with params using specific connection returns nothing
+        /// </summary>
+        /// <param name="StoredProcedure">Stored procedure name</param>
+        /// <param name="parameters">Dictionary with params</param>
+        /// <param name="Connection">ConnectionString name</param>
         public void executeStoreProcedureNonQuery(String StoredProcedure, Dictionary<String, object> parameters, String Connection)
         {
             SqlConnection dbconn = new SqlConnection(connectionString(Connection));
@@ -485,8 +547,11 @@ namespace Data
          *               FLOAT                  * 
          ***************************************/
 
-
-        /* EJECUTA STORED PROCEDURE Y RETORNA UN FLOTANTE */
+        /// <summary>
+        ///     Execute stored procedure with no params returns float
+        /// </summary>
+        /// <param name="spName">Stored procedure name</param>
+        /// <returns></returns>
         public float executeStoreProcedureFloat(String spName)
         {
 
@@ -519,7 +584,12 @@ namespace Data
             }
         }
 
-        /* EJECUTA STORED PROCEDURE Y RETORNA UN FLOTANTE EN UNA CONEXION DIFERENTE */
+        /// <summary>
+        ///     Execute stored procedure with no params using specific connection returns float
+        /// </summary>
+        /// <param name="spName">Stored Procedure name</param>
+        /// <param name="Connection">ConnectionString name</param>
+        /// <returns></returns>
         public float executeStoreProcedureFloat(String spName, String Connection)
         {
 
@@ -551,8 +621,13 @@ namespace Data
                 }
             }
         }
-
-        /* EJECUTA STORED PROCEDURE CON PARAMETROS Y RETORNA UN FLOTANTE */
+        
+        /// <summary>
+        ///     Execute stored procedure with params returns float
+        /// </summary>
+        /// <param name="spName">Stored procedure name</param>
+        /// <param name="parameters">Dictionary with params</param>
+        /// <returns></returns>
         public float executeStoreProcedureFloat(String spName, Dictionary<String, object> parameters)
         {
 
@@ -590,7 +665,13 @@ namespace Data
             }
         }
 
-        /* EJECUTA STORED PROCEDURE CON PARAMETROS Y RETORNA UN FLOTANTE EN CONEXION DIFERENTE */
+        /// <summary>
+        ///     Execute stored procedure with params using specific connection returns float
+        /// </summary>
+        /// <param name="spName">Stored Procedure name</param>
+        /// <param name="parameters">Dictionary with params</param>
+        /// <param name="Connection">ConnectionString name</param>
+        /// <returns></returns>
         public float executeStoreProcedureFloat(String spName, Dictionary<String, object> parameters, String Connection)
         {
             SqlConnection dbconn = new SqlConnection(connectionString(Connection));
@@ -632,8 +713,11 @@ namespace Data
          *                 INT                  * 
          ***************************************/
 
-
-        /* EJECUTA STORED PROCEDURE Y RETORNA UN ENTERO */
+        /// <summary>
+        ///     Execute stored procedure with no params returns int
+        /// </summary>
+        /// <param name="spName">Stored procedure name</param>
+        /// <returns></returns>
         public int executeStoreProcedureInt(String spName)
         {
 
@@ -666,7 +750,12 @@ namespace Data
             }
         }
 
-        /* EJECUTA STORED PROCEDURE Y RETORNA UN ENTERO EN UNA CONEXION DIFERENTE */
+        /// <summary>
+        ///     Execute stored procedure with no params using specific connection returns int
+        /// </summary>
+        /// <param name="spName">Stored procedure name</param>
+        /// <param name="Connection">ConnectionString name</param>
+        /// <returns></returns>
         public int executeStoreProcedureInt(String spName, String Connection)
         {
 
@@ -699,7 +788,12 @@ namespace Data
             }
         }
 
-        /* EJECUTA STORED PROCEDURE CON PARAMETROS Y RETORNA UN ENTERO */
+        /// <summary>
+        ///     Execute stored procedure with params returns int
+        /// </summary>
+        /// <param name="spName">Stored procedure name</param>
+        /// <param name="parameters">Dictionary with params</param>
+        /// <returns></returns>
         public int executeStoreProcedureInt(String spName, Dictionary<String, object> parameters)
         {
 
@@ -737,7 +831,13 @@ namespace Data
             }
         }
 
-        /* EJECUTA STORED PROCEDURE CON PARAMETROS Y RETORNA UN ENTERO EN CONEXION DIFERENTE */
+        /// <summary>
+        ///     Execute stored procedure with params using specific connection returns int
+        /// </summary>
+        /// <param name="spName">Stored procedure name</param>
+        /// <param name="parameters">Dictionary with params</param>
+        /// <param name="Connection">ConnectionString name</param>
+        /// <returns></returns>
         public int executeStoreProcedureInt(String spName, Dictionary<String, object> parameters, String Connection)
         {
             SqlConnection dbconn = new SqlConnection(connectionString(Connection));
